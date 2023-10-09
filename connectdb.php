@@ -8,20 +8,32 @@
 <body>
 
   <?php
-  mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-  $mysqli = new mysqli('localhost', 'root', 'root', 'chatdb', 3306); // you can omit the last argument
-  $mysqli->set_charset('utf8mb4'); // always set the charset
-  if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+  echo "Teste Vebindung zur Datenbank<br>";
+  $mysqli = new mysqli("localhost", "root", "", "chat");
+  if ($mysqli->connect_errno) {
+    die("Verbindung fehlgeschlagen: <br>" . $mysqli->connect_error . "<br>");
   } else {
-    echo "Connected to db server";
+    echo "Verbindung hergestellt<br>";
+  }
+  $id = 100;
+  $sql = "SELECT * FROM Message";
+  $statement = $mysqli->prepare($sql);
+  $statement->execute();
+
+  $result = $statement->get_result();
+  
+  while ($row = $result->fetch_object()) {
+    echo "UUID: " . $row->Uuid . "; Text:" . $row->Text . "<br>";
   }
 
-  $sql = "INSERT INTO Message (Uuid, Text) VALUES (unhex(replace(uuid(),'-','')),'Testnachricht-php');";
+  // $id = 100;
+  // $sql = "SELECT * FROM Fenster";
+  // $statement = $mysqli->prepare($sql);
+  // $statement->execute();
 
-  if ($conn->query($sql) === TRUE) {
-    echo "New record created successfully";
-  } else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
-  }
+  // $result = $statement->get_result();
+
+  // while ($row = $result->fetch_object()) {
+  //   echo "ID: " . $row->id . "; Anzahl:" . $row->anzahl;
+  // }
   ?>
