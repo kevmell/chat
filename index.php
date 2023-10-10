@@ -10,22 +10,36 @@
 
 <body>
 
-  <!-- <?php
-        $messages = [];
+  <?php
+  $servername = "localhost";
+  $username = "root";
+  $password = "";
+  $dbname = "chat";
 
-        if (isset($_POST['Nachricht'])) {
-          array_push($messages, $_POST['Nachricht']);
-        }
+  // Create connection
+  $conn = new mysqli($servername, $username, $password, $dbname);
+  // Check connection
+  if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+  }
 
-        foreach ($messages as $message) {
-          echo $message;
-        }
+  $sql = "SELECT Text FROM Message";
+  $result = $conn->query($sql);
 
-        ?> -->
+  echo '<div id="messages" class="messages">';
+  if ($result->num_rows > 0) {
 
-  <div id="messages" class="messages">
+    // output data of each row
+    while ($row = $result->fetch_assoc()) {
+      echo '<div class="message">' . $row["Text"] . '</div>';
+    }
+  }
+  echo '</div>';
+  $conn->close();
+  ?>
 
-  </div>
+
+
   <textarea id="Nachricht" name="Nachricht" rows="10" cols="50" placeholder="Ihre Nachricht"></textarea>
   <input id="send" type="submit" name="submit" class="submit-button" />
 </body>
