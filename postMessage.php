@@ -13,7 +13,9 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "INSERT INTO Message (Uuid, Text) VALUES (unhex(replace(uuid(),'-','')),'" . file_get_contents('php://input') . "');";
+// Wenn JSON als als content type verwendet wird ("Content-type": "application/json; charset=UTF-8"): 
+// $message = json_decode(file_get_contents('php://input'))->text;
+$sql = "INSERT INTO Message (Uuid, Text) VALUES (unhex(replace(uuid(),'-','')),'" . $_POST['text'] . "');";
 
 if ($conn->query($sql) === TRUE) {
   // console_log("New record created successfully");
