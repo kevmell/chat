@@ -23,7 +23,7 @@
     die("Connection failed: " . $conn->connect_error);
   }
 
-  $sql = "SELECT Text FROM Message";
+  $sql = "SELECT Text FROM Message ORDER BY Time";
   $result = $conn->query($sql);
 
   echo '<div id="messages" class="messages">';
