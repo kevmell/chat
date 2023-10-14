@@ -46,10 +46,13 @@ class ChatHandler {
 
 	function doHandshake($received_header,$client_socket_resource, $host_name, $port) {
 		$headers = array();
+    // Trennt die Zeichen auf mithilfe eines regulären Ausdrucks
 		$lines = preg_split("/\r\n/", $received_header);
 		foreach($lines as $line)
 		{
+      // remove whitespace from the end of a string (Alias von rtrim())
 			$line = chop($line);
+      // prüft regulären Ausdruck
 			if(preg_match('/\A(\S+): (.*)\z/', $line, $matches))
 			{
 				$headers[$matches[1]] = $matches[2];
@@ -64,6 +67,7 @@ class ChatHandler {
 		"WebSocket-Origin: $host_name\r\n" .
 		"WebSocket-Location: ws://$host_name:$port/demo/shout.php\r\n".
 		"Sec-WebSocket-Accept:$secAccept\r\n\r\n";
+    // Der Handsshale wird dem client gesendet
 		socket_write($client_socket_resource,$buffer,strlen($buffer));
 	}
 	
