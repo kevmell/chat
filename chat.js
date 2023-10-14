@@ -6,7 +6,7 @@ function addMessage(message) {
   divMessages.appendChild(newDivMessage);
 }
 
-var source = new EventSource("channel.php");
+const source = new EventSource("channel_txt.php");
 source.addEventListener("newMessage", (event) => {
   addMessage(event.data);
 });
