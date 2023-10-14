@@ -1,47 +1,15 @@
-<!DOCTYPE html>
-<html lang="de">
-
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chat</title>
-  <script type="module" src="./chat.js"></script>
-</head>
-
-<body>
-
-  <?php
-  $servername = "localhost";
-  $username = "root";
-  $password = "";
-  $dbname = "chat";
-
-  // Create connection
-  $conn = new mysqli($servername, $username, $password, $dbname);
-  // Check connection
-  if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-  }
-
-  $sql = "SELECT Text FROM Message ORDER BY Time";
-  $result = $conn->query($sql);
-
-  echo '<div id="messages" class="messages">';
-  if ($result->num_rows > 0) {
-
-    // output data of each row
-    while ($row = $result->fetch_assoc()) {
-      echo '<div class="message">' . $row["Text"] . '</div>';
-    }
-  }
-  echo '</div>';
-  $conn->close();
-  ?>
-
-
-
-  <textarea id="Nachricht" name="Nachricht" rows="10" cols="50" placeholder="Ihre Nachricht"></textarea>
-  <input id="send" type="submit" name="submit" class="submit-button" />
+  <link rel="stylesheet" href="style.css">
+	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  <script src="client.js"></script>
+	</head>
+	<body>
+		<form name="frmChat" id="frmChat">
+			<div id="chat-box"></div>
+			<input type="text" name="chat-user" id="chat-user" placeholder="Name" class="chat-input" required />
+			<input type="text" name="chat-message" id="chat-message" placeholder="Message"  class="chat-input chat-message" required />
+			<input type="submit" id="btnSend" name="send-chat-message" value="Send" >
+		</form>
 </body>
-
 </html>
