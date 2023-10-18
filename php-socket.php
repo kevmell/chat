@@ -56,8 +56,10 @@ while (true) {
       $socketMessage = $chatHandler->unseal($socketData);
       $messageObj = json_decode($socketMessage);
 
-      $chat_box_message = $chatHandler->createChatBoxMessage($messageObj->chat_user, $messageObj->chat_message);
-      $chatHandler->send($chat_box_message);
+      if(isset($messageObj->chat_message)){
+        $chat_box_message = $chatHandler->createChatBoxMessage($messageObj->chat_user, $messageObj->chat_message);
+        $chatHandler->send($chat_box_message);
+      }
       break 2;
     }
 

@@ -8,6 +8,10 @@ $(document).ready(function () {
     showMessage(
       "<div class='chat-connection-ack'>Connection is established!</div>"
     );
+    var messageJSON = {
+      chat_user: username,
+    };
+    websocket.send(JSON.stringify(messageJSON));
   };
   websocket.onmessage = function (event) {
     var Data = JSON.parse(event.data);
@@ -26,9 +30,8 @@ $(document).ready(function () {
 
   $("#frmChat").on("submit", function (event) {
     event.preventDefault();
-    $("#chat-user").attr("type", "hidden");
     var messageJSON = {
-      chat_user: $("#chat-user").val(),
+      chat_user: username,
       chat_message: $("#chat-message").val(),
     };
     websocket.send(JSON.stringify(messageJSON));

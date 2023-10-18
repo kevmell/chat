@@ -67,7 +67,7 @@ class ChatHandler
       "WebSocket-Origin: $host_name\r\n" .
       "WebSocket-Location: ws://$host_name:$port/demo/shout.php\r\n" .
       "Sec-WebSocket-Accept:$secAccept\r\n\r\n";
-    // Der Handsshale wird dem client gesendet
+    // Der Handshake wird dem client gesendet
     socket_write($client_socket_resource, $buffer, strlen($buffer));
   }
 
