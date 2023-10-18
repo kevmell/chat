@@ -89,7 +89,7 @@ class ChatHandler
 
   function createChatBoxMessage($chat_user, $chat_box_message)
   {
-    $message = $chat_user . ": <div class='chat-box-message'>" . $chat_box_message . "</div>";
+    $message =   $chat_user . ": " . $chat_box_message;
     $messageArray = array('message' => $message, 'message_type' => 'chat-box-html');
     $chatMessage = $this->seal(json_encode($messageArray));
     return $chatMessage;

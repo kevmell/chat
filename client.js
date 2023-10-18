@@ -16,7 +16,11 @@ $(document).ready(function () {
   websocket.onmessage = function (event) {
     var Data = JSON.parse(event.data);
     showMessage(
-      "<div class='" + Data.message_type + "'>" + Data.message + "</div>"
+      "<div class='" +
+        Data.message_type +
+        " card card-block p-2 m-2 g-col-12'>" +
+        Data.message +
+        "</div>"
     );
     $("#chat-message").val("");
   };
