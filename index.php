@@ -12,10 +12,10 @@
 <body>
   <div class="row h-100">
     <div class="col-sm-12 my-auto">
-      <div class="card card-block w-25 mx-auto">
-        <form action="chat.php" method="post" class="y-auto">
+      <div class="w-25 mx-auto">
+        <form action="chat.php" method="post">
           <input type="text" class="form-control" name="name" placeholder="Wie heißt du?" required /><br />
-          <input type="Submit" class="form-control" value="Chat starten" />
+          <input type="submit" class="btn btn-primary w-100" value="Chat starten" />
         </form>
       </div>
     </div>

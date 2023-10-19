@@ -22,18 +22,20 @@
     exit();
   } ?>
 
-  <div class="row h-100">
-    <div class="col-sm-12 my-auto">
-      <div class="card card-block gap-3 w-75 mx-auto">
+  <div class="row h-75 overflow-auto">
+    <div class="col-sm-12 my-5">
+      <div class="card card-block w-75 mx-auto">
         <div id="chat-box" class="grid gap-3">
         </div>
-        <form class="mb-3" name="frmChat" id="frmChat">
-          <input type="textarea" class="form-control m-2" name="chat-message" id="chat-message" placeholder="Deine Nachricht" required />
-          <input type="submit" class="form-control m-2" id="btnSend" name="send-chat-message" value="Senden">
-        </form>
       </div>
     </div>
   </div>
+      <div class="gap-3 w-75 mx-auto">
+        <form class="mb-3" name="frmChat" id="frmChat">
+          <input type="textarea" class="form-control g-col-12 p-2 my-2" name="chat-message" id="chat-message" placeholder="Deine Nachricht" required />
+          <input type="submit" class="btn btn-primary w-100" id="btnSend" name="send-chat-message" value="Senden">
+        </form>
+      </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
