@@ -34,7 +34,7 @@ class LoginService
     return is_array($resultArray) && count($resultArray) > 0;
   }
 
-  public function registerMember()
+  public function register()
   {
     if ($this->isUsernameExists($_POST["username"])) {
       return array(
@@ -50,11 +50,11 @@ class LoginService
       );
     }
 
-    if (!empty($_POST["signup-password"])) {
+    if (!empty($_POST["password"])) {
       $hashedPassword = password_hash($_POST["password"], PASSWORD_DEFAULT);
     }
 
-    $query = 'INSERT INTO user (username, password, email) VALUES (?, ?, ?)';
+    $query = 'INSERT INTO user (Username, Password, Email) VALUES (?, ?, ?)';
     $paramType = 'sss';
     $paramValue = array(
       $_POST["username"],
@@ -87,7 +87,7 @@ class LoginService
     return $userRecord;
   }
 
-  public function loginMember()
+  public function login()
   {
     $userRecord = $this->getUser($_POST["email"], "Email");
     if (!empty($userRecord)) {

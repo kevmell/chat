@@ -1,17 +1,16 @@
 <?php
 require_once __DIR__ . '/LoginService.php';
 
-if (isset($_POST["email"]) && isset($_POST["password"])) {
+if (isset($_POST["username"]) && isset($_POST["email"]) && isset($_POST["password"])) {
   $loginService = new LoginService();
-  $loginFailure = $loginService->login();
-}
+  $registerResult = $loginService->register();
+  if ($registerResult["status"] == "success") {
+    session_start();
+    $_SESSION["message"] = $registerResult["message"];
 
-session_start();
-if (isset($_SESSION["message"])) {
-  $message = $_SESSION["message"];
-
-  unset($SESSION["message"]);
-  session_destroy();
+    $url = "./login.php";
+    header("Location: $url");
+  }
 }
 
 ?>
@@ -31,17 +30,13 @@ if (isset($_SESSION["message"])) {
     <div class="col-sm-12 my-auto">
       <div class="w-25 mx-auto">
         <form method="post">
-          <?php
-          if (!empty($loginFailure)) {
-            echo '<p class="w-100 text-center">' . $loginFailure . '</p>';
-          }
-          if (!empty($message)) {
-            echo '<p class="w-100 text-center">' . $message . '</p>';
-          }
-          ?>
+          <?php if (isset($registerResult["message"])) { ?>
+            <p class="w-100 text-center"><?php echo $registerResult["message"]; ?></p>
+          <?php } ?>
+          <input type="username" class="form-control my-2" id="username" name="username" placeholder="Benutzername" required>
           <input type="email" class="form-control my-2" id="email" name="email" placeholder="E-mail" required>
           <input type="password" class="form-control my-2" id="password" name="password" placeholder="Passwort" required>
-          <input type="submit" value="Login" class="btn btn-primary w-100">
+          <input type="submit" value="Registrieren" class="btn btn-primary w-100">
         </form>
       </div>
     </div>
